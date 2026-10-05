@@ -10,12 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TrustRouteImport } from './routes/trust'
+import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/audit'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as VPublicIdRouteImport } from './routes/v.$publicId'
+import { Route as AuthenticatedLocationsIndexRouteImport } from './routes/_authenticated/locations.index'
+import { Route as AuthenticatedLocationsIdRouteImport } from './routes/_authenticated/locations.$id'
+import { Route as AuthenticatedVerificationsIndexRouteImport } from './routes/_authenticated/verifications.index'
+import { Route as AuthenticatedVerificationsIdRouteImport } from './routes/_authenticated/verifications.$id'
+import { Route as AuthenticatedVerificationsNewRouteImport } from './routes/_authenticated/verifications.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -23,40 +43,166 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrustRoute = TrustRouteImport.update({
   id: '/trust',
   path: '/trust',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAuditRoute = AuthenticatedAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const VPublicIdRoute = VPublicIdRouteImport.update({
+  id: '/v/$publicId',
+  path: '/v/$publicId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedLocationsIndexRoute =
+  AuthenticatedLocationsIndexRouteImport.update({
+    id: '/locations/',
+    path: '/locations/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLocationsIdRoute =
+  AuthenticatedLocationsIdRouteImport.update({
+    id: '/locations/$id',
+    path: '/locations/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVerificationsIndexRoute =
+  AuthenticatedVerificationsIndexRouteImport.update({
+    id: '/verifications/',
+    path: '/verifications/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVerificationsIdRoute =
+  AuthenticatedVerificationsIdRouteImport.update({
+    id: '/verifications/$id',
+    path: '/verifications/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVerificationsNewRoute =
+  AuthenticatedVerificationsNewRouteImport.update({
+    id: '/verifications/new',
+    path: '/verifications/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
+  '/audit': typeof AuthenticatedAuditRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/v/$publicId': typeof VPublicIdRoute
+  '/locations/$id': typeof AuthenticatedLocationsIdRoute
+  '/verifications/$id': typeof AuthenticatedVerificationsIdRoute
+  '/verifications/new': typeof AuthenticatedVerificationsNewRoute
+  '/locations/': typeof AuthenticatedLocationsIndexRoute
+  '/verifications/': typeof AuthenticatedVerificationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
+  '/audit': typeof AuthenticatedAuditRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/v/$publicId': typeof VPublicIdRoute
+  '/locations/$id': typeof AuthenticatedLocationsIdRoute
+  '/verifications/$id': typeof AuthenticatedVerificationsIdRoute
+  '/verifications/new': typeof AuthenticatedVerificationsNewRoute
+  '/locations': typeof AuthenticatedLocationsIndexRoute
+  '/verifications': typeof AuthenticatedVerificationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
+  '/_authenticated/audit': typeof AuthenticatedAuditRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/v/$publicId': typeof VPublicIdRoute
+  '/_authenticated/locations/$id': typeof AuthenticatedLocationsIdRoute
+  '/_authenticated/verifications/$id': typeof AuthenticatedVerificationsIdRoute
+  '/_authenticated/verifications/new': typeof AuthenticatedVerificationsNewRoute
+  '/_authenticated/locations/': typeof AuthenticatedLocationsIndexRoute
+  '/_authenticated/verifications/': typeof AuthenticatedVerificationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-works' | '/trust'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/how-it-works'
+    | '/reset-password'
+    | '/trust'
+    | '/audit'
+    | '/dashboard'
+    | '/v/$publicId'
+    | '/locations/$id'
+    | '/verifications/$id'
+    | '/verifications/new'
+    | '/locations/'
+    | '/verifications/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-works' | '/trust'
-  id: '__root__' | '/' | '/how-it-works' | '/trust'
+  to:
+    | '/'
+    | '/auth'
+    | '/how-it-works'
+    | '/reset-password'
+    | '/trust'
+    | '/audit'
+    | '/dashboard'
+    | '/v/$publicId'
+    | '/locations/$id'
+    | '/verifications/$id'
+    | '/verifications/new'
+    | '/locations'
+    | '/verifications'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/how-it-works'
+    | '/reset-password'
+    | '/trust'
+    | '/_authenticated/audit'
+    | '/_authenticated/dashboard'
+    | '/v/$publicId'
+    | '/_authenticated/locations/$id'
+    | '/_authenticated/verifications/$id'
+    | '/_authenticated/verifications/new'
+    | '/_authenticated/locations/'
+    | '/_authenticated/verifications/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   TrustRoute: typeof TrustRoute
+  VPublicIdRoute: typeof VPublicIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +214,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trust': {
@@ -82,13 +249,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrustRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/audit': {
+      id: '/_authenticated/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthenticatedAuditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/v/$publicId': {
+      id: '/v/$publicId'
+      path: '/v/$publicId'
+      fullPath: '/v/$publicId'
+      preLoaderRoute: typeof VPublicIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/locations/': {
+      id: '/_authenticated/locations/'
+      path: '/locations'
+      fullPath: '/locations/'
+      preLoaderRoute: typeof AuthenticatedLocationsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/locations/$id': {
+      id: '/_authenticated/locations/$id'
+      path: '/locations/$id'
+      fullPath: '/locations/$id'
+      preLoaderRoute: typeof AuthenticatedLocationsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verifications/': {
+      id: '/_authenticated/verifications/'
+      path: '/verifications'
+      fullPath: '/verifications/'
+      preLoaderRoute: typeof AuthenticatedVerificationsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verifications/$id': {
+      id: '/_authenticated/verifications/$id'
+      path: '/verifications/$id'
+      fullPath: '/verifications/$id'
+      preLoaderRoute: typeof AuthenticatedVerificationsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verifications/new': {
+      id: '/_authenticated/verifications/new'
+      path: '/verifications/new'
+      fullPath: '/verifications/new'
+      preLoaderRoute: typeof AuthenticatedVerificationsNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedLocationsIdRoute: typeof AuthenticatedLocationsIdRoute
+  AuthenticatedVerificationsIdRoute: typeof AuthenticatedVerificationsIdRoute
+  AuthenticatedVerificationsNewRoute: typeof AuthenticatedVerificationsNewRoute
+  AuthenticatedLocationsIndexRoute: typeof AuthenticatedLocationsIndexRoute
+  AuthenticatedVerificationsIndexRoute: typeof AuthenticatedVerificationsIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAuditRoute: AuthenticatedAuditRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedLocationsIdRoute: AuthenticatedLocationsIdRoute,
+  AuthenticatedVerificationsIdRoute: AuthenticatedVerificationsIdRoute,
+  AuthenticatedVerificationsNewRoute: AuthenticatedVerificationsNewRoute,
+  AuthenticatedLocationsIndexRoute: AuthenticatedLocationsIndexRoute,
+  AuthenticatedVerificationsIndexRoute: AuthenticatedVerificationsIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   TrustRoute: TrustRoute,
+  VPublicIdRoute: VPublicIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
