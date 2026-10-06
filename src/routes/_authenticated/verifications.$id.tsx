@@ -38,7 +38,7 @@ function Page() {
 
   async function doRevoke() {
     const res = await revoke({ data: { id } });
-    if ("error" in res && res.error) return toast.error(res.error);
+    if ("error" in res && res.error) { toast.error(res.error); return; }
     toast.success("Request revoked");
     qc.invalidateQueries();
   }

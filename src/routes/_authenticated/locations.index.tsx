@@ -80,7 +80,7 @@ function AddDialog({ open, onOpenChange, orgId }: { open: boolean; onOpenChange:
     setBusy(true);
     const r = await create({ data: { organizationId: orgId, label: String(f.get("label")), reference: String(f.get("reference") || "") || undefined, inputText: String(f.get("input") || "") || undefined } });
     setBusy(false);
-    if ("error" in r && r.error) return toast.error(r.error);
+    if ("error" in r && r.error) { toast.error(r.error); return; }
     toast.success(r.notFound ? "Saved — reference not found, location left unresolved" : "Location saved");
     qc.invalidateQueries({ queryKey: ["locations"] });
     onOpenChange(false);
