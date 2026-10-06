@@ -57,7 +57,7 @@ export function AppShell() {
   );
 }
 
-export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: React.ReactNode }) {
+export function PageHeader({ title, description, actions }: { title: string; description?: string | undefined; actions?: React.ReactNode }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-4 border-b bg-background px-6 py-5">
       <div>
