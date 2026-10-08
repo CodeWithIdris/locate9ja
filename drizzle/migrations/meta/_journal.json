@@ -8,6 +8,20 @@
       "when": 1791129214669,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791438451344,
+      "tag": "0001_extend_organization_roles",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791438479766,
+      "tag": "0002_phase2_platform_foundation",
+      "breakpoints": true
     }
   ]
 }
