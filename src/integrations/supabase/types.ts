@@ -14,6 +14,133 @@ export type Database = {
   }
   public: {
     Tables: {
+      api_keys: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          developer_project_id: string
+          expires_at: string | null
+          id: string
+          key_hash: string
+          key_prefix: string
+          last_used_at: string | null
+          name: string
+          organization_id: string
+          revoked_at: string | null
+          revoked_by: string | null
+          scopes: string[]
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          developer_project_id: string
+          expires_at?: string | null
+          id?: string
+          key_hash: string
+          key_prefix: string
+          last_used_at?: string | null
+          name: string
+          organization_id: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scopes?: string[]
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          developer_project_id?: string
+          expires_at?: string | null
+          id?: string
+          key_hash?: string
+          key_prefix?: string
+          last_used_at?: string | null
+          name?: string
+          organization_id?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scopes?: string[]
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_keys_developer_project_id_fkey"
+            columns: ["developer_project_id"]
+            isOneToOne: false
+            referencedRelation: "developer_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "api_keys_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      api_request_logs: {
+        Row: {
+          api_key_id: string | null
+          created_at: string
+          developer_project_id: string | null
+          id: string
+          latency_ms: number | null
+          method: string
+          organization_id: string
+          path: string
+          request_id: string | null
+          status_code: number
+        }
+        Insert: {
+          api_key_id?: string | null
+          created_at?: string
+          developer_project_id?: string | null
+          id?: string
+          latency_ms?: number | null
+          method: string
+          organization_id: string
+          path: string
+          request_id?: string | null
+          status_code: number
+        }
+        Update: {
+          api_key_id?: string | null
+          created_at?: string
+          developer_project_id?: string | null
+          id?: string
+          latency_ms?: number | null
+          method?: string
+          organization_id?: string
+          path?: string
+          request_id?: string | null
+          status_code?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_request_logs_api_key_id_fkey"
+            columns: ["api_key_id"]
+            isOneToOne: false
+            referencedRelation: "api_keys"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "api_request_logs_developer_project_id_fkey"
+            columns: ["developer_project_id"]
+            isOneToOne: false
+            referencedRelation: "developer_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "api_request_logs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           action: string
@@ -47,12 +174,132 @@ export type Database = {
         }
         Relationships: []
       }
+      business_locations: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          city: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          is_active: boolean
+          is_primary: boolean
+          latitude: number | null
+          lga: string | null
+          location_id: string | null
+          location_type: string
+          longitude: number | null
+          name: string
+          organization_id: string
+          postcode: string | null
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_active?: boolean
+          is_primary?: boolean
+          latitude?: number | null
+          lga?: string | null
+          location_id?: string | null
+          location_type?: string
+          longitude?: number | null
+          name: string
+          organization_id: string
+          postcode?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_active?: boolean
+          is_primary?: boolean
+          latitude?: number | null
+          lga?: string | null
+          location_id?: string | null
+          location_type?: string
+          longitude?: number | null
+          name?: string
+          organization_id?: string
+          postcode?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_locations_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "business_locations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      developer_projects: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          environment: string
+          id: string
+          name: string
+          organization_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          environment?: string
+          id?: string
+          name: string
+          organization_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          environment?: string
+          id?: string
+          name?: string
+          organization_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "developer_projects_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       locations: {
         Row: {
           area: string | null
           confirmation_status: string
           created_at: string
           created_by: string | null
+          deleted_at: string | null
           district: string | null
           formatted_address: string | null
           id: string
@@ -75,6 +322,7 @@ export type Database = {
           confirmation_status?: string
           created_at?: string
           created_by?: string | null
+          deleted_at?: string | null
           district?: string | null
           formatted_address?: string | null
           id?: string
@@ -97,6 +345,7 @@ export type Database = {
           confirmation_status?: string
           created_at?: string
           created_by?: string | null
+          deleted_at?: string | null
           district?: string | null
           formatted_address?: string | null
           id?: string
@@ -117,6 +366,62 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "locations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organization_invites: {
+        Row: {
+          accepted_at: string | null
+          accepted_by: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          organization_id: string
+          revoked_at: string | null
+          role: Database["public"]["Enums"]["org_role"]
+          status: string
+          token_hash: string
+          updated_at: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          organization_id: string
+          revoked_at?: string | null
+          role?: Database["public"]["Enums"]["org_role"]
+          status?: string
+          token_hash: string
+          updated_at?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          organization_id?: string
+          revoked_at?: string | null
+          role?: Database["public"]["Enums"]["org_role"]
+          status?: string
+          token_hash?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_invites_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -158,6 +463,7 @@ export type Database = {
           created_at: string
           id: string
           name: string
+          settings: Json
           slug: string
           status: string
           updated_at: string
@@ -166,6 +472,7 @@ export type Database = {
           created_at?: string
           id?: string
           name: string
+          settings?: Json
           slug: string
           status?: string
           updated_at?: string
@@ -174,6 +481,7 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string
+          settings?: Json
           slug?: string
           status?: string
           updated_at?: string
@@ -182,24 +490,121 @@ export type Database = {
       }
       profiles: {
         Row: {
+          active_organization_id: string | null
           created_at: string
           email: string | null
           full_name: string | null
           id: string
         }
         Insert: {
+          active_organization_id?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
           id: string
         }
         Update: {
+          active_organization_id?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
           id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_active_organization_id_fkey"
+            columns: ["active_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rate_limits: {
+        Row: {
+          bucket_key: string
+          id: string
+          limit_value: number
+          organization_id: string | null
+          request_count: number
+          subject_hash: string
+          updated_at: string
+          window_started_at: string
+        }
+        Insert: {
+          bucket_key: string
+          id?: string
+          limit_value?: number
+          organization_id?: string | null
+          request_count?: number
+          subject_hash: string
+          updated_at?: string
+          window_started_at: string
+        }
+        Update: {
+          bucket_key?: string
+          id?: string
+          limit_value?: number
+          organization_id?: string | null
+          request_count?: number
+          subject_hash?: string
+          updated_at?: string
+          window_started_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rate_limits_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      usage_counters: {
+        Row: {
+          count: number
+          developer_project_id: string | null
+          id: string
+          metric: string
+          organization_id: string
+          period_start: string
+          updated_at: string
+        }
+        Insert: {
+          count?: number
+          developer_project_id?: string | null
+          id?: string
+          metric: string
+          organization_id: string
+          period_start: string
+          updated_at?: string
+        }
+        Update: {
+          count?: number
+          developer_project_id?: string | null
+          id?: string
+          metric?: string
+          organization_id?: string
+          period_start?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usage_counters_developer_project_id_fkey"
+            columns: ["developer_project_id"]
+            isOneToOne: false
+            referencedRelation: "developer_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "usage_counters_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       verification_events: {
         Row: {
@@ -250,6 +655,7 @@ export type Database = {
           expires_at: string
           id: string
           location_id: string | null
+          message: string | null
           opened_at: string | null
           organization_id: string
           public_id: string
@@ -269,6 +675,7 @@ export type Database = {
           expires_at?: string
           id?: string
           location_id?: string | null
+          message?: string | null
           opened_at?: string | null
           organization_id: string
           public_id: string
@@ -288,6 +695,7 @@ export type Database = {
           expires_at?: string
           id?: string
           location_id?: string | null
+          message?: string | null
           opened_at?: string | null
           organization_id?: string
           public_id?: string
@@ -317,11 +725,138 @@ export type Database = {
           },
         ]
       }
+      webhook_deliveries: {
+        Row: {
+          attempt_count: number
+          created_at: string
+          event_id: string
+          event_type: string
+          id: string
+          last_attempt_at: string | null
+          next_attempt_at: string | null
+          organization_id: string
+          payload: Json
+          response_excerpt: string | null
+          response_status_code: number | null
+          status: string
+          webhook_endpoint_id: string
+        }
+        Insert: {
+          attempt_count?: number
+          created_at?: string
+          event_id: string
+          event_type: string
+          id?: string
+          last_attempt_at?: string | null
+          next_attempt_at?: string | null
+          organization_id: string
+          payload?: Json
+          response_excerpt?: string | null
+          response_status_code?: number | null
+          status?: string
+          webhook_endpoint_id: string
+        }
+        Update: {
+          attempt_count?: number
+          created_at?: string
+          event_id?: string
+          event_type?: string
+          id?: string
+          last_attempt_at?: string | null
+          next_attempt_at?: string | null
+          organization_id?: string
+          payload?: Json
+          response_excerpt?: string | null
+          response_status_code?: number | null
+          status?: string
+          webhook_endpoint_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webhook_deliveries_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "webhook_deliveries_webhook_endpoint_id_fkey"
+            columns: ["webhook_endpoint_id"]
+            isOneToOne: false
+            referencedRelation: "webhook_endpoints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      webhook_endpoints: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          developer_project_id: string | null
+          event_types: string[]
+          id: string
+          name: string
+          organization_id: string
+          secret_hash: string
+          secret_prefix: string
+          status: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          developer_project_id?: string | null
+          event_types?: string[]
+          id?: string
+          name: string
+          organization_id: string
+          secret_hash: string
+          secret_prefix: string
+          status?: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          developer_project_id?: string | null
+          event_types?: string[]
+          id?: string
+          name?: string
+          organization_id?: string
+          secret_hash?: string
+          secret_prefix?: string
+          status?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webhook_endpoints_developer_project_id_fkey"
+            columns: ["developer_project_id"]
+            isOneToOne: false
+            referencedRelation: "developer_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "webhook_endpoints_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      can_manage_org: {
+        Args: { _org: string; _user: string }
+        Returns: boolean
+      }
       has_org_role: {
         Args: {
           _org: string
