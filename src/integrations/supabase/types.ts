@@ -333,7 +333,14 @@ export type Database = {
       is_org_member: { Args: { _org: string; _user: string }; Returns: boolean }
     }
     Enums: {
-      org_role: "owner" | "admin" | "member" | "viewer"
+      org_role:
+        | "owner"
+        | "admin"
+        | "member"
+        | "viewer"
+        | "manager"
+        | "developer"
+        | "analyst"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -461,7 +468,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      org_role: ["owner", "admin", "member", "viewer"],
+      org_role: [
+        "owner",
+        "admin",
+        "member",
+        "viewer",
+        "manager",
+        "developer",
+        "analyst",
+      ],
     },
   },
 } as const
