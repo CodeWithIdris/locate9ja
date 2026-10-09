@@ -6,7 +6,7 @@ import { fmtDate } from "@/lib/org";
 import { PageHeader } from "@/components/app-shell";
 import { StatusBadge, ProviderTag } from "@/components/status";
 
-export const Route = createFileRoute("/_authenticated/locations/$id")({
+export const Route = createFileRoute("/_authenticated/app/locations/$id")({
   head: () => ({ meta: [{ title: "Location — LocateNG" }, { name: "description", content: "Location record detail." }] }),
   component: Page,
 });
@@ -29,7 +29,7 @@ function Page() {
   return (
     <>
       <PageHeader title={l.label} description={l.formatted_address ?? "Not yet resolved"}
-        actions={<Link to="/locations" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Locations</Link>} />
+        actions={<Link to="/app/locations" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Locations</Link>} />
       <div className="grid gap-6 p-6 lg:grid-cols-[2fr_1fr]">
         <section className="rounded-md border bg-card">
           <div className="flex items-center justify-between border-b px-4 py-3"><h2 className="text-sm font-semibold">Structured record</h2><ProviderTag provider={l.provider} /></div>
@@ -54,7 +54,7 @@ function Page() {
           <ul className="divide-y text-sm">
             {q.data!.vrs.map((v) => (
               <li key={v.id} className="flex items-center justify-between px-4 py-2.5">
-                <Link to="/verifications/$id" params={{ id: v.id }} className="hover:underline">{v.recipient_name}</Link>
+                <Link to="/app/verifications/$id" params={{ id: v.id }} className="hover:underline">{v.recipient_name}</Link>
                 <StatusBadge status={v.status} />
               </li>
             ))}

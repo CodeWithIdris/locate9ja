@@ -8,7 +8,7 @@ import { PageHeader, EmptyState } from "@/components/app-shell";
 import { StatusBadge } from "@/components/status";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/_authenticated/verifications/")({
+export const Route = createFileRoute("/_authenticated/app/verifications/")({
   head: () => ({ meta: [{ title: "Verifications — LocateNG" }, { name: "description", content: "Verification requests." }] }),
   component: Page,
 });
@@ -28,7 +28,7 @@ function Page() {
   return (
     <>
       <PageHeader title="Verification requests" description="Ask the intended person to confirm a location."
-        actions={<Button asChild size="sm"><Link to="/verifications/new"><Plus />New request</Link></Button>} />
+        actions={<Button asChild size="sm"><Link to="/app/verifications/new"><Plus />New request</Link></Button>} />
       <div className="p-6">
         <div className="mb-4 flex flex-wrap gap-1">
           {FILTERS.map((x) => (
@@ -46,7 +46,7 @@ function Page() {
               <tbody className="divide-y">
                 {rows.map((r) => (
                   <tr key={r.id} className="hover:bg-muted/40">
-                    <td className="px-4 py-2.5"><Link to="/verifications/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.recipient_name}</Link><div className="text-xs text-muted-foreground">{r.recipient_email}</div></td>
+                    <td className="px-4 py-2.5"><Link to="/app/verifications/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.recipient_name}</Link><div className="text-xs text-muted-foreground">{r.recipient_email}</div></td>
                     <td className="px-4 py-2.5 font-mono text-xs">{r.reference ?? "—"}</td>
                     <td className="px-4 py-2.5 text-muted-foreground">{r.purpose}</td>
                     <td className="px-4 py-2.5"><StatusBadge status={r.status} /></td>

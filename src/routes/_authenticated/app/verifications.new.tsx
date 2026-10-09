@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export const Route = createFileRoute("/_authenticated/verifications/new")({
+export const Route = createFileRoute("/_authenticated/app/verifications/new")({
   head: () => ({ meta: [{ title: "New verification — LocateNG" }, { name: "description", content: "Create a verification request." }] }),
   component: Page,
 });
@@ -68,7 +68,7 @@ function Page() {
             </div>
             {qr && <img src={qr} alt="QR code for the verification link" className="h-44 w-44 rounded-sm border" />}
             <div className="flex gap-2">
-              <Button asChild><Link to="/verifications/$id" params={{ id: result.id }}>View request</Link></Button>
+              <Button asChild><Link to="/app/verifications/$id" params={{ id: result.id }}>View request</Link></Button>
               <Button variant="outline" onClick={() => setResult(null)}>Create another</Button>
             </div>
           </div>
