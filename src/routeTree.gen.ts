@@ -12,10 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TrustRouteImport } from './routes/trust'
 import { Route as VPublicIdRouteImport } from './routes/v.$publicId'
+import { Route as VerifyPublicIdRouteImport } from './routes/verify.$publicId'
 import { Route as AuthenticatedAppAuditRouteImport } from './routes/_authenticated/app/audit'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/app/dashboard'
 import { Route as AuthenticatedAppLocationsIndexRouteImport } from './routes/_authenticated/app/locations.index'
@@ -38,9 +41,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -56,6 +69,11 @@ const TrustRoute = TrustRouteImport.update({
 const VPublicIdRoute = VPublicIdRouteImport.update({
   id: '/v/$publicId',
   path: '/v/$publicId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyPublicIdRoute = VerifyPublicIdRouteImport.update({
+  id: '/verify/$publicId',
+  path: '/verify/$publicId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAppAuditRoute = AuthenticatedAppAuditRouteImport.update({
@@ -103,10 +121,13 @@ const AuthenticatedAppVerificationsNewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/docs': typeof DocsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
   '/v/$publicId': typeof VPublicIdRoute
+  '/verify/$publicId': typeof VerifyPublicIdRoute
   '/app/audit': typeof AuthenticatedAppAuditRoute
   '/app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/app/locations/$id': typeof AuthenticatedAppLocationsIdRoute
@@ -118,10 +139,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/docs': typeof DocsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
   '/v/$publicId': typeof VPublicIdRoute
+  '/verify/$publicId': typeof VerifyPublicIdRoute
   '/app/audit': typeof AuthenticatedAppAuditRoute
   '/app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/app/locations/$id': typeof AuthenticatedAppLocationsIdRoute
@@ -135,10 +159,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/docs': typeof DocsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trust': typeof TrustRoute
   '/v/$publicId': typeof VPublicIdRoute
+  '/verify/$publicId': typeof VerifyPublicIdRoute
   '/_authenticated/app/audit': typeof AuthenticatedAppAuditRoute
   '/_authenticated/app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/_authenticated/app/locations/$id': typeof AuthenticatedAppLocationsIdRoute
@@ -152,10 +179,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/docs'
     | '/how-it-works'
+    | '/pricing'
     | '/reset-password'
     | '/trust'
     | '/v/$publicId'
+    | '/verify/$publicId'
     | '/app/audit'
     | '/app/dashboard'
     | '/app/locations/$id'
@@ -167,10 +197,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/docs'
     | '/how-it-works'
+    | '/pricing'
     | '/reset-password'
     | '/trust'
     | '/v/$publicId'
+    | '/verify/$publicId'
     | '/app/audit'
     | '/app/dashboard'
     | '/app/locations/$id'
@@ -183,10 +216,13 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/docs'
     | '/how-it-works'
+    | '/pricing'
     | '/reset-password'
     | '/trust'
     | '/v/$publicId'
+    | '/verify/$publicId'
     | '/_authenticated/app/audit'
     | '/_authenticated/app/dashboard'
     | '/_authenticated/app/locations/$id'
@@ -200,10 +236,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  DocsRoute: typeof DocsRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  PricingRoute: typeof PricingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   TrustRoute: typeof TrustRoute
   VPublicIdRoute: typeof VPublicIdRoute
+  VerifyPublicIdRoute: typeof VerifyPublicIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -229,11 +268,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -255,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/v/$publicId'
       fullPath: '/v/$publicId'
       preLoaderRoute: typeof VPublicIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify/$publicId': {
+      id: '/verify/$publicId'
+      path: '/verify/$publicId'
+      fullPath: '/verify/$publicId'
+      preLoaderRoute: typeof VerifyPublicIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app/audit': {
@@ -337,10 +397,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  DocsRoute: DocsRoute,
   HowItWorksRoute: HowItWorksRoute,
+  PricingRoute: PricingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   TrustRoute: TrustRoute,
   VPublicIdRoute: VPublicIdRoute,
+  VerifyPublicIdRoute: VerifyPublicIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
