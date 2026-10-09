@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-export const Route = createFileRoute("/_authenticated/locations/")({
+export const Route = createFileRoute("/_authenticated/app/locations/")({
   head: () => ({ meta: [{ title: "Locations — LocateNG" }, { name: "description", content: "Organization location records." }] }),
   component: Page,
 });
@@ -52,7 +52,7 @@ function Page() {
               <tbody className="divide-y">
                 {rows.map((r) => (
                   <tr key={r.id} className="hover:bg-muted/40">
-                    <td className="px-4 py-2.5"><Link to="/locations/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.label}</Link></td>
+                    <td className="px-4 py-2.5"><Link to="/app/locations/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.label}</Link></td>
                     <td className="px-4 py-2.5 font-mono text-xs">{r.postcode ?? "—"}</td>
                     <td className="px-4 py-2.5 text-muted-foreground">{[r.area, r.lga, r.state].filter(Boolean).join(", ") || "—"}</td>
                     <td className="px-4 py-2.5"><StatusBadge status={r.resolution_status} /></td>

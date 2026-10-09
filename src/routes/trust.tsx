@@ -4,10 +4,12 @@ import { SiteHeader, SiteFooter } from "@/components/site";
 export const Route = createFileRoute("/trust")({
   head: () => ({
     meta: [
-      { title: "Trust & boundaries — LocateNG" },
-      { name: "description", content: "What a LocateNG verification proves, what it does not, and how LocateNG relates to NIPOST." },
-      { property: "og:title", content: "Trust & boundaries — LocateNG" },
-      { property: "og:description", content: "Clear limits on what a confirmed location means." },
+      { title: "Trust & security — LocateNG" },
+      { name: "description", content: "How LocateNG protects location workflows with secure links, access controls, audit trails and organization isolation." },
+      { property: "og:title", content: "Trust & security — LocateNG" },
+      { property: "og:description", content: "Security controls for reliable location operations." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
@@ -18,29 +20,33 @@ function Page() {
     <div className="min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <div className="eyebrow">Trust & boundaries</div>
-        <h1 className="mt-3 text-3xl font-semibold">What LocateNG is, and what it isn't</h1>
+        <div className="eyebrow">Trust & security</div>
+        <h1 className="mt-3 text-3xl font-semibold">Controls around every location workflow</h1>
+        <p className="mt-4 text-muted-foreground">LocateNG limits access, records important actions and keeps each organization’s operational data isolated.</p>
         <div className="mt-8 space-y-8 text-[15px] leading-relaxed">
           <section>
-            <h2 className="text-lg font-semibold">Relationship with NIPOST</h2>
-            <p className="mt-2 text-muted-foreground">NIPOST operates the National Digital Alphanumeric Postcode System. LocateNG is an independent workflow platform designed to use authorized NIPOST services as an external provider. LocateNG is not NIPOST, does not replace it, and does not keep a copy of NIPOST postcode data.</p>
+            <h2 className="text-lg font-semibold">Secure, revocable links</h2>
+            <p className="mt-2 text-muted-foreground">Each recipient link uses a strong random secret. Only its cryptographic hash is stored. Links expire automatically and can be revoked before completion.</p>
           </section>
           <section>
-            <h2 className="text-lg font-semibold">What a confirmation means</h2>
-            <p className="mt-2 text-muted-foreground">A confirmed location records that a location reference was resolved and that the person who received the request confirmed it as the intended place, for the stated purpose, at a recorded time.</p>
+            <h2 className="text-lg font-semibold">Organization isolation and access control</h2>
+            <p className="mt-2 text-muted-foreground">Records are scoped to an organization at the database layer. Role-based permissions control who can manage members, locations, developer projects and integrations.</p>
           </section>
           <section>
-            <h2 className="text-lg font-semibold">What it does not prove</h2>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-              <li>Proof of residence or occupancy</li>
-              <li>Proof of property ownership or title</li>
-              <li>Proof of identity</li>
-              <li>Proof of business ownership or registration</li>
-            </ul>
+            <h2 className="text-lg font-semibold">Auditability</h2>
+            <p className="mt-2 text-muted-foreground">Request creation, link opens, resolution outcomes, recipient decisions and administrative changes are recorded with actor, resource and timestamp context.</p>
           </section>
           <section>
-            <h2 className="text-lg font-semibold">Data handling</h2>
-            <p className="mt-2 text-muted-foreground">Organizations only see their own records. Verification links use random secrets that are stored as hashes, expire, and can be revoked. Public pages show only what the recipient needs to make a decision.</p>
+            <h2 className="text-lg font-semibold">Data minimization</h2>
+            <p className="mt-2 text-muted-foreground">Public pages expose only the context a recipient needs to respond. API logs avoid request payloads and full secrets are never displayed after creation.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold">API and webhook security</h2>
+            <p className="mt-2 text-muted-foreground">API credentials and webhook secrets are generated server-side, stored as hashes and revealed only once. Webhook deliveries are signed and retry history remains visible to authorized team members.</p>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold">Clear scope</h2>
+            <p className="mt-2 text-muted-foreground">A confirmation records that the intended recipient accepted a resolved location for a stated purpose. It does not establish identity, residence, ownership or legal status.</p>
           </section>
         </div>
       </main>

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useOrg, fmtDate } from "@/lib/org";
 import { PageHeader, EmptyState } from "@/components/app-shell";
 
-export const Route = createFileRoute("/_authenticated/audit")({
+export const Route = createFileRoute("/_authenticated/app/audit")({
   head: () => ({ meta: [{ title: "Audit log — LocateNG" }, { name: "description", content: "Organization audit log." }] }),
   component: Page,
 });

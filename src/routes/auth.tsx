@@ -17,6 +17,8 @@ export const Route = createFileRoute("/auth")({
       { name: "description", content: "Sign in or create a LocateNG organization account." },
       { property: "og:title", content: "Sign in — LocateNG" },
       { property: "og:description", content: "Access your LocateNG workspace." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,
@@ -43,7 +45,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signUp({
           email, password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
+            emailRedirectTo: `${window.location.origin}/auth`,
             data: { full_name: String(f.get("name") ?? ""), organization_name: String(f.get("org") ?? "") },
           },
         });
@@ -52,7 +54,7 @@ function AuthPage() {
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        navigate({ to: "/dashboard" });
+        navigate({ to: "/app/dashboard" });
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
@@ -65,7 +67,7 @@ function AuthPage() {
     const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
     if (r.error) { toast.error("Google sign-in failed"); return; }
     if (r.redirected) return;
-    navigate({ to: "/dashboard" });
+    navigate({ to: "/app/dashboard" });
   }
 
   const title = mode === "signup" ? "Create your organization" : mode === "forgot" ? "Reset your password" : "Sign in to LocateNG";
@@ -78,7 +80,7 @@ function AuthPage() {
           <p className="text-lg text-sidebar-accent-foreground">Resolve a location. Have the right person confirm it. Keep the record.</p>
           <p className="mt-4 text-sm">New workspaces include sample locations and requests so you can explore every workflow.</p>
         </div>
-        <p className="font-mono text-xs">LocateNG is not affiliated with NIPOST.</p>
+        <p className="font-mono text-xs">Secure location operations for Nigerian businesses.</p>
       </div>
       <div className="flex items-center justify-center p-6">
         <div className="w-full max-w-sm">

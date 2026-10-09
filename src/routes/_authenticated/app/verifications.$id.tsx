@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/app-shell";
 import { StatusBadge } from "@/components/status";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/_authenticated/verifications/$id")({
+export const Route = createFileRoute("/_authenticated/app/verifications/$id")({
   head: () => ({ meta: [{ title: "Verification request — LocateNG" }, { name: "description", content: "Verification request detail." }] }),
   component: Page,
 });
@@ -47,7 +47,7 @@ function Page() {
     <>
       <PageHeader title={r.recipient_name ?? "Verification request"} description={`${r.purpose ?? ""} · ${r.public_id}`}
         actions={<>
-          <Link to="/verifications" className="inline-flex items-center gap-1 self-center text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />All requests</Link>
+          <Link to="/app/verifications" className="inline-flex items-center gap-1 self-center text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />All requests</Link>
           {ACTIVE.includes(r.status) && <Button size="sm" variant="outline" onClick={doRevoke}>Revoke</Button>}
         </>} />
       <div className="grid gap-6 p-6 lg:grid-cols-[1fr_1fr]">
@@ -59,7 +59,7 @@ function Page() {
               ["Reference", r.reference], ["Email", r.recipient_email], ["Phone", r.recipient_phone],
               ["Created", fmtDate(r.created_at, true)], ["Opened", fmtDate(r.opened_at, true)],
               ["Completed", fmtDate(r.completed_at, true)], ["Expires", fmtDate(r.expires_at, true)],
-              ["Location", loc ? <Link key="l" to="/locations/$id" params={{ id: loc.id }} className="text-primary hover:underline">{loc.postcode ?? loc.label} · {[loc.area, loc.state].filter(Boolean).join(", ")}</Link> : "Awaiting submission"],
+              ["Location", loc ? <Link key="l" to="/app/locations/$id" params={{ id: loc.id }} className="text-primary hover:underline">{loc.postcode ?? loc.label} · {[loc.area, loc.state].filter(Boolean).join(", ")}</Link> : "Awaiting submission"],
             ] as const).map(([k, v]) => (
               <div key={k} className="grid grid-cols-[120px_1fr] px-4 py-2.5"><dt className="text-muted-foreground">{k}</dt><dd>{v ?? "—"}</dd></div>
             ))}

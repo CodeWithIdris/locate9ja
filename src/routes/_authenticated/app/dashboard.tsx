@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/app-shell";
 import { StatusBadge } from "@/components/status";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/_authenticated/dashboard")({
+export const Route = createFileRoute("/_authenticated/app/dashboard")({
   head: () => ({ meta: [{ title: "Overview — LocateNG" }, { name: "description", content: "Organization overview." }] }),
   component: Dashboard,
 });
@@ -38,7 +38,7 @@ function Dashboard() {
   return (
     <>
       <PageHeader title="Overview" description={org.data?.name}
-        actions={<Button asChild size="sm"><Link to="/verifications/new"><Plus />New verification</Link></Button>} />
+        actions={<Button asChild size="sm"><Link to="/app/verifications/new"><Plus />New verification</Link></Button>} />
       <div className="space-y-6 p-6">
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border bg-border lg:grid-cols-4">
           {stats.map(([k, n]) => (
@@ -51,13 +51,13 @@ function Dashboard() {
         <section className="rounded-md border bg-card">
           <div className="flex items-center justify-between border-b px-4 py-3">
             <h2 className="text-sm font-semibold">Recent verification requests</h2>
-            <Link to="/verifications" className="text-sm text-primary hover:underline">View all</Link>
+            <Link to="/app/verifications" className="text-sm text-primary hover:underline">View all</Link>
           </div>
           <table className="w-full text-sm">
             <tbody className="divide-y">
               {v.slice(0, 6).map((r) => (
                 <tr key={r.id} className="hover:bg-muted/50">
-                  <td className="px-4 py-2.5"><Link to="/verifications/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.recipient_name}</Link><div className="text-xs text-muted-foreground">{r.purpose}</div></td>
+                  <td className="px-4 py-2.5"><Link to="/app/verifications/$id" params={{ id: r.id }} className="font-medium hover:underline">{r.recipient_name}</Link><div className="text-xs text-muted-foreground">{r.purpose}</div></td>
                   <td className="px-4 py-2.5"><StatusBadge status={r.status} /></td>
                   <td className="px-4 py-2.5 text-right text-muted-foreground">{fmtDate(r.created_at)}</td>
                 </tr>
