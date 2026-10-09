@@ -20,6 +20,8 @@ export const Route = createFileRoute("/v/$publicId")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Confirm your location — LocateNG" },
       { property: "og:description", content: "A secure request to confirm a physical location." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Page,
@@ -101,7 +103,7 @@ function Page() {
         <div className="rounded-md border bg-card p-6 shadow-sm">{body}</div>
         <p className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          Confirming a location records that you identified this place for the stated purpose. It is not proof of residence, ownership or identity. LocateNG is not NIPOST.
+          Your response is recorded for the stated purpose. It does not establish identity, residence or ownership.
         </p>
       </main>
     </div>
